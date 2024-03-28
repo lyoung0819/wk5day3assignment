@@ -141,6 +141,16 @@ ORDER BY count(*) DESC;
 ----------------------------------------------------------------------------------------
 -- >> 9. List the actors who have been in between 20 and 25 films. <<
 
--- Answer:
+-- Answer: 64 actors 
 
 -- Query: 
+SELECT * 
+FROM (
+	SELECT a.first_name, a.last_name, COUNT(*)
+	FROM actor a
+	JOIN film_actor fa 
+	ON fa.actor_id = a.actor_id
+	GROUP BY a.first_name, a.last_name
+	ORDER BY COUNT(*))
+WHERE COUNT BETWEEN 20 AND 25;
+
